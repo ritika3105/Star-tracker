@@ -28,3 +28,10 @@ inliers = res_arcsec < 300
 np.save("data/inliers.npy", inliers)
 
 print("A4 complete — RMS (arcsec):", np.sqrt(np.mean(res_arcsec[inliers]**2)))
+
+plt.hist(res_arcsec, bins=10)
+plt.xlabel("Residual (arcsec)")
+plt.ylabel("Count")
+plt.title("Verification Residuals")
+plt.tight_layout()
+plt.show()
