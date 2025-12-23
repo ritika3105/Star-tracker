@@ -1,4 +1,5 @@
 from astroquery.gaia import Gaia
+import matplotlib.pyplot as plt
 # ---- Metadata ----
 RA0_DEG  = 101.812
 DEC0_DEG = -48.565
