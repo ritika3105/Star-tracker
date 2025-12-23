@@ -29,7 +29,7 @@ out = pd.DataFrame(
 
 out.to_csv("data/matched_star_data_star_centroids_2.csv", index=False)
 print("A5 complete — final CSV saved")
-
+import matplotlib.pyplot as plt
 plt.figure(figsize=(5,5))
 plt.scatter(
     gaia_df["ra"],
