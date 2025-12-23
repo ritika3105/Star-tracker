@@ -2,6 +2,16 @@
 
 import pandas as pd
 import numpy as np
+matched_df = pd.DataFrame({
+    "x_centroid": df.loc[img_indices, "x_centroid"].values,
+    "y_centroid": df.loc[img_indices, "y_centroid"].values,
+    "brightness": df.loc[img_indices, "brightness"].values,
+    "ra": gaia_df.loc[cat_indices, "ra"].values,
+    "dec": gaia_df.loc[cat_indices, "dec"].values,
+    "magnitude": gaia_df.loc[cat_indices, "phot_g_mean_mag"].values
+})
+
+matched_df
 
 df = pd.read_csv("data/star_centroids_2.csv")
 gaia = pd.read_csv("data/gaia_catalog_star_centroids_2.csv")
