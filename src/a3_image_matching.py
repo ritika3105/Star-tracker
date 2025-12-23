@@ -54,3 +54,20 @@ np.save("data/initial_matches.npy", matches)
 np.save("data/image_vectors.npy", vec_img)
 
 print("A3 complete — initial matches:", len(matches))
+
+plt.figure(figsize=(6,5))
+sc = plt.scatter(
+    df["x_centroid"],
+    df["y_centroid"],
+    c=df["brightness"],
+    cmap="plasma",
+    s=20
+)
+plt.gca().invert_yaxis()
+plt.xlabel("x (pixels)")
+plt.ylabel("y (pixels)")
+plt.title("Detected Star Centroids (Colored by Brightness)")
+plt.colorbar(sc, label="Brightness")
+plt.tight_layout()
+plt.show()
+
