@@ -54,7 +54,7 @@ np.save("data/initial_matches.npy", matches)
 np.save("data/image_vectors.npy", vec_img)
 
 print("A3 complete — initial matches:", len(matches))
-
+import matplotlib.pyplot as plt
 plt.figure(figsize=(6,5))
 sc = plt.scatter(
     df["x_centroid"],
