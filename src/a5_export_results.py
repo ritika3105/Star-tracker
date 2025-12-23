@@ -1,46 +1,39 @@
-# A5: Export Final Matched Star Data
-
 import pandas as pd
 import numpy as np
-matched_df = pd.DataFrame({
-    "x_centroid": df.loc[img_indices, "x_centroid"].values,
-    "y_centroid": df.loc[img_indices, "y_centroid"].values,
-    "brightness": df.loc[img_indices, "brightness"].values,
-    "ra": gaia_df.loc[cat_indices, "ra"].values,
-    "dec": gaia_df.loc[cat_indices, "dec"].values,
-    "magnitude": gaia_df.loc[cat_indices, "phot_g_mean_mag"].values
-})
+import matplotlib.pyplot as plt
 
-matched_df
-
+# Load data
 df = pd.read_csv("data/star_centroids_2.csv")
-gaia = pd.read_csv("data/gaia_catalog_star_centroids_2.csv")
+gaia_df = pd.read_csv("data/gaia_catalog_star_centroids_2.csv")
 
 matches = np.load("data/initial_matches.npy", allow_pickle=True)
 inliers = np.load("data/inliers.npy")
 
+# Build rows safely
 rows = []
 
 for (img_i, cat_i), ok in zip(matches, inliers):
     if ok:
-        rows.append([
-            df.loc[img_i,"x_centroid"],
-            df.loc[img_i,"y_centroid"],
-            df.loc[img_i,"brightness"],
-            gaia.loc[cat_i,"ra"],
-            gaia.loc[cat_i,"dec"],
-            gaia.loc[cat_i,"phot_g_mean_mag"]
-        ])
+        rows.append({
+            "x_centroid": df.loc[int(img_i), "x_centroid"],
+            "y_centroid": df.loc[int(img_i), "y_centroid"],
+            "brightness": df.loc[int(img_i), "brightness"],
+            "ra": gaia_df.loc[int(cat_i), "ra"],
+            "dec": gaia_df.loc[int(cat_i), "dec"],
+            "magnitude": gaia_df.loc[int(cat_i), "phot_g_mean_mag"]
+        })
 
-out = pd.DataFrame(
-    rows,
-    columns=["x_centroid","y_centroid","brightness","ra","dec","magnitude"]
+matched_df = pd.DataFrame(rows)
+
+matched_df
+matched_df.to_csv(
+    "data/matched_star_data_star_centroids_2.csv",
+    index=False
 )
 
-out.to_csv("data/matched_star_data_star_centroids_2.csv", index=False)
 print("A5 complete — final CSV saved")
-import matplotlib.pyplot as plt
 plt.figure(figsize=(5,5))
+
 plt.scatter(
     gaia_df["ra"],
     gaia_df["dec"],
@@ -65,3 +58,4 @@ plt.gca().invert_xaxis()
 plt.legend()
 plt.tight_layout()
 plt.show()
+
