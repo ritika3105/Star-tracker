@@ -22,3 +22,21 @@ gaia_df = job.get_results().to_pandas()
 
 gaia_df.to_csv("data/gaia_catalog_star_centroids_2.csv", index=False)
 print("A1 complete — GAIA stars:", len(gaia_df))
+
+#------Catalog plots------
+plt.figure(figsize=(5,5))
+plt.scatter(gaia_df["ra"], gaia_df["dec"], s=30)
+plt.xlabel("RA (deg)")
+plt.ylabel("DEC (deg)")
+plt.title("GAIA DR3 Stars in FoV")
+plt.gca().invert_xaxis()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(5,3))
+plt.hist(gaia_df["phot_g_mean_mag"], bins=10)
+plt.xlabel("G Magnitude")
+plt.ylabel("Count")
+plt.title("Magnitude Distribution")
+plt.tight_layout()
+plt.show()
