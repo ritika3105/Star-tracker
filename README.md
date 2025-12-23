@@ -99,3 +99,9 @@ scipy
 astropy
 astroquery
 ```
+**Author**
+
+**Ritika
+BS–MS Physics, IISER Mohali**
+
+Assessment submission for Digantara – Image Processing Engineer (Star Tracker)
