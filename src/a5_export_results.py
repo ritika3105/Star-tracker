@@ -29,3 +29,29 @@ out = pd.DataFrame(
 
 out.to_csv("data/matched_star_data_star_centroids_2.csv", index=False)
 print("A5 complete — final CSV saved")
+
+plt.figure(figsize=(5,5))
+plt.scatter(
+    gaia_df["ra"],
+    gaia_df["dec"],
+    s=15,
+    alpha=0.3,
+    label="Catalog stars"
+)
+
+plt.scatter(
+    matched_df["ra"],
+    matched_df["dec"],
+    s=60,
+    facecolors="none",
+    edgecolors="red",
+    label="Matched stars"
+)
+
+plt.xlabel("RA (deg)")
+plt.ylabel("DEC (deg)")
+plt.title("Sky Projection of Matched Stars")
+plt.gca().invert_xaxis()
+plt.legend()
+plt.tight_layout()
+plt.show()
